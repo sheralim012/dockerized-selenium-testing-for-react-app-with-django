@@ -1,0 +1,5 @@
+Django==3.2.*
+djangorestframework==3.14.*
+django-cors-headers==3.13.*
+selenium==4.8.*
+factory-boy==3.2.*
