@@ -11,15 +11,14 @@ import Login from "./Login";
 function App() {
   return (
     <div className="container">
-
-    <Router>
-      <Header />
+      <Router>
+        <Header />
         <Routes>
-          <Route exact path="/Login" element={<Login />} />            
+          <Route exact path="/Login" element={<Login />} />
           <Route exact path="/" element={<Login />} />
         </Routes>
       </Router>
-      </div>
+    </div>
   );
 }
 
