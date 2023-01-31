@@ -3,26 +3,21 @@ version: "3.4"
 services:
 
   django:
-    build:
-      context: .
-      dockerfile: ./Dockerfile.be
+    build: ./biddingly-be
     ports:
-      - 8000:8000
+      - "8000:8000"
     volumes:
-      - ./biddingly-be:/code
+      - "./biddingly-be:/code"
     depends_on:
       frontend:
         condition: service_healthy
 
   frontend:
-    build:
-      context: .
-      dockerfile: ./Dockerfile.fe
+    build: ./biddingly-fe
     volumes:
       - "./biddingly-fe:/app"
-      - "/app/node_modules"
     ports:
-      - 3000:3000
+      - "3000:3000"
     depends_on:
       firefox:
         condition: service_healthy
@@ -35,15 +30,15 @@ services:
   selenium-hub:
     image: selenium/hub:4.8.0-20230123
     ports:
-      - 4442:4442
-      - 4443:4443
-      - 4444:4444
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
   
   firefox:
     image: selenium/node-firefox:4.8.0-20230123
     shm_size: 2gb
     ports:
-      - 7900:7900
+      - "7900:7900"
     depends_on:
       - selenium-hub
     environment:

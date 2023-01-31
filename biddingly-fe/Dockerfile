@@ -7,11 +7,11 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 # install app dependencies
-COPY ./biddingly-fe/package.json ./biddingly-fe/package-lock.json ./
+COPY ./package.json ./package-lock.json ./
 RUN npm install
 
 # add app
-COPY ./biddingly-fe ./
+COPY . .
 
 EXPOSE 3000
 

@@ -1,4 +1,4 @@
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from django.contrib.staticfiles.testing import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver import Keys
@@ -9,8 +9,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from users.factories import UserFactory
 
 
-# Create your tests here.
-class LoginTest(StaticLiveServerTestCase):
+class LoginTest(LiveServerTestCase):
     host = "0.0.0.0"
     port = 8000
 
@@ -37,7 +36,6 @@ class LoginTest(StaticLiveServerTestCase):
 
     def setUp(self):
         self.user = UserFactory(username='sheralim012', email="sheralim012@gmail.com")
-        self.url = "login"
 
     def test_login(self):
         self.driver.get(f"http://frontend:3000/login")
