@@ -8,12 +8,12 @@ function Login() {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    let resp = await axios.post(`http://django:8000/users/token/`, { username, password });
+    let resp = await axios.post(`http://django:8001/users/token/`, { username, password });
     const { token } = resp.data;
     const config = {
       headers: { Authorization: `Token ${token}` }
     };
-    resp = await axios.get('http://django:8000/users/profile/', config);
+    resp = await axios.get('http://django:8001/users/profile/', config);
     const { email } = resp.data;
     setEmail(email);
   };

@@ -4,13 +4,11 @@ services:
 
   django:
     build: ./biddingly-be
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
     volumes:
       - "./biddingly-be:/code"
-    depends_on:
-      frontend:
-        condition: service_healthy
 
   frontend:
     build: ./biddingly-fe
@@ -18,14 +16,6 @@ services:
       - "./biddingly-fe:/app"
     ports:
       - "3000:3000"
-    depends_on:
-      firefox:
-        condition: service_healthy
-    healthcheck:
-      test: curl --fail http://localhost:3000 || exit 1
-      timeout: 20s
-      retries: 10
-
 
   selenium-hub:
     image: selenium/hub:4.8.0-20230123
@@ -33,7 +23,7 @@ services:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
-  
+
   firefox:
     image: selenium/node-firefox:4.8.0-20230123
     shm_size: 2gb
@@ -45,7 +35,3 @@ services:
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-    healthcheck:
-      test: curl --fail http://localhost:7900 || exit 1
-      timeout: 20s
-      retries: 10

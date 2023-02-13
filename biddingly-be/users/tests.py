@@ -11,7 +11,7 @@ from users.factories import UserFactory
 
 class LoginTest(LiveServerTestCase):
     host = "0.0.0.0"
-    port = 8000
+    port = 8001
 
     @classmethod
     def setUpClass(cls):
